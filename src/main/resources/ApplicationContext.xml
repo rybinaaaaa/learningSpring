@@ -10,4 +10,8 @@
     <bean id="musicBean"
           class="rybina.course.core.ClassicalMusic">
     </bean>
+    <bean id="musicPlayer"
+        class="rybina.course.core.MusicPlayer">
+        <constructor-arg ref="musicBean"/>
+    </bean>
 </beans>
