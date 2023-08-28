@@ -1,34 +1,28 @@
 package rybina.course.core;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Random;
+
+@Component
 public class MusicPlayer {
-    private Music music;
+
+    private Music classicalMusic;
+
+    private Music rockMusic;
 
     private List<Music> musicList;
-    private int volume;
 
     public MusicPlayer() {
     }
-    public MusicPlayer(Music music) {
-        this.music = music;
-    }
 
-    public MusicPlayer(Music music, List<Music> musicList) {
-        this.music = music;
-        this.musicList = musicList;
-    }
-
-    public String getMusic() {
-        return music.getSong();
-    }
-
-    public void setMusic(Music music) {
-        this.music = music;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
+    @Autowired
+    public MusicPlayer(@Qualifier("rockMusic") Music rockMusic, @Qualifier("classicalMusic") Music classicalMusic) {
+        this.classicalMusic = classicalMusic;
+        this.rockMusic = rockMusic;
     }
 
     public List<Music> getMusicList() {
@@ -37,5 +31,17 @@ public class MusicPlayer {
 
     public void setMusicList(List<Music> musicList) {
         this.musicList = musicList;
+    }
+
+    public void playMusic(MusicType music) {
+        switch (music) {
+            case ROCK:
+                System.out.println(rockMusic.getSongs().get((int) (Math.random() * 10 % rockMusic.getSongs().size())));
+                break;
+            case CLASSICAL:
+                System.out.println(classicalMusic.getSongs().get((int) (Math.random() * 10 % classicalMusic.getSongs().size())));
+                System.out.println("match2");
+                break;
+        }
     }
 }
