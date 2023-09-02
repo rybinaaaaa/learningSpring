@@ -1,28 +1,16 @@
 package rybina.course.core;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
-import java.util.Random;
+import java.util.function.Function;
 
-@Component
 public class MusicPlayer {
-
-    private Music classicalMusic;
-
-    private Music rockMusic;
-
     private List<Music> musicList;
 
     public MusicPlayer() {
     }
 
-    @Autowired
-    public MusicPlayer(@Qualifier("rockMusic") Music rockMusic, @Qualifier("classicalMusic") Music classicalMusic) {
-        this.classicalMusic = classicalMusic;
-        this.rockMusic = rockMusic;
+    public MusicPlayer(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
     public List<Music> getMusicList() {
@@ -33,15 +21,10 @@ public class MusicPlayer {
         this.musicList = musicList;
     }
 
-    public void playMusic(MusicType music) {
-        switch (music) {
-            case ROCK:
-                System.out.println(rockMusic.getSongs().get((int) (Math.random() * 10 % rockMusic.getSongs().size())));
-                break;
-            case CLASSICAL:
-                System.out.println(classicalMusic.getSongs().get((int) (Math.random() * 10 % classicalMusic.getSongs().size())));
-                System.out.println("match2");
-                break;
-        }
+    public void playMusic() {
+        Function<List, Integer> random = (List list) ->(int) Math.random() * 10 / list.size();
+        List<String> randomMusic = musicList.get(random.apply(musicList)).getSongs();
+
+        System.out.println(randomMusic.get(random.apply(randomMusic)));
     }
 }

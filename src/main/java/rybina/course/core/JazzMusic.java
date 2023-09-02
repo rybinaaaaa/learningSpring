@@ -2,10 +2,9 @@ package rybina.course.core;
 
 import java.util.List;
 
-public class IndieMusic implements Music{
+public class JazzMusic implements Music {
 
-    private List<String> songs = List.of("Indie1", "Indie2", "indie3");
-
+    private List<String> songs = List.of("Jazz1", "Jazz2", "Jazz3");
     @Override
     public List<String> getSongs() {
         return songs;

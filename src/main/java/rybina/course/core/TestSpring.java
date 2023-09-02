@@ -1,22 +1,20 @@
 package rybina.course.core;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class TestSpring {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext.xml"
-        );
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//                "applicationContext.xml"
+//        );
 
-//        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-//        System.out.println(musicPlayer.getMusic());
-//        for (Music music: musicPlayer.getMusicList()) {
-//            System.out.println(music.getSong());
-//        }
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringConfig.class
+        );
 
         MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
-        musicPlayer.playMusic(MusicType.ROCK);
+        musicPlayer.playMusic();
         context.close();
     }
 }

@@ -2,5 +2,7 @@ package rybina.course.core;
 
 public enum MusicType {
     ROCK,
-    CLASSICAL
+    CLASSICAL,
+    INDIE,
+    JAZZ
 }
